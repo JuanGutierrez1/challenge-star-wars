@@ -1,0 +1,78 @@
+.flip-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  perspective: 1200px;
+}
+
+.card,
+.skeleton-card {
+  cursor: pointer;
+  /* background-color: #0c213c; */
+  /* background: rgb(2, 0, 36);
+  background: linear-gradient(200deg, #0c213c 0%, #2a4057 35%, #5c7d8e 100%); */
+  background: radial-gradient(circle at -4% -12.9%, #2a4057 0.3%, #0c213c 90.2%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  width: 250px;
+  height: 150px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transition: transform 0.8s;
+  font-size: 1rem;
+  transform-style: preserve-3d;
+}
+
+.front-content,
+.back-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 0.5rem;
+  transform: rotateY(180deg);
+}
+
+
+.card-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0rem 1.2rem;
+  font-size: 1rem;
+}
+
+.card:hover,
+.skeleton-card:hover {
+  transform: rotateY(180deg);
+}
+
+.skeleton-card {
+  animation: shimmer 1.5s infinite;
+  background: linear-gradient(90deg, #0c213c 25%, #2a4057 50%, #0c213c 75%);
+  background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}

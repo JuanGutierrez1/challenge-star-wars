@@ -1,0 +1,13 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding: 3rem 1rem;
+  border-radius: 10px;
+
+  background: radial-gradient(circle at -8.9% 51.2%, #5c7d8e 0%, #5c7d8e 15.9%, #86aaba 15.9%, #86aaba 24.4%, #2a4057 24.5%, #2a4057 66%);
+  color: #f8ebe3;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}

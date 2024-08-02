@@ -11,6 +11,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0rem 2rem;
+}
+
 /* Scrollbar styles */
 ::-webkit-scrollbar {
   width: 8px;
@@ -26,15 +32,8 @@
   border-radius: 10px;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  background-image: url("background.jpg");
+body {
+  background-image: url("/background.png");
 }
 
 a {
@@ -50,4 +49,25 @@ a:hover {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+p,
+strong {
+  margin-block: 0;
+}
+
+input {
+  outline: none;
+  border: 0;
+  padding: 1rem 1.5rem;
+  border-radius: 15px;
+  height: 30px;
+  font-size: 1rem;
+  background-color: #0c213c;
+  color: #f6f7f2;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+input::placeholder {
+  color: #a5b5c4;
 }
