@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
-import { getCharacterFilms, getCharacterPlanet, getCharacterShips } from "../../services/characters"
-import { Character, Film, Ship, World } from "../../types/App.types"
-import { SmallCard } from "../../ui/small-card/smallCard"
-import './characterInfo.css'
+import { getCharacterFilms, getCharacterPlanet } from "../../services/characters"
+import { Character, Film, World } from "../../types/App.types"
+import style from './characterInfo.module.css'
 import { genderObject } from "../../utils/utils"
 
 
@@ -10,7 +9,6 @@ import { genderObject } from "../../utils/utils"
 export const CharacterInfo = ({ character }: { character: Character | null }) => {
   const [homeWorld, setHomeWorld] = useState<World | null>(null)
   const [films, setFilms] = useState<Film[]>([])
-  const [ships, setShips] = useState<Ship[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
   const fetchCharacterInfo = async () => {
@@ -20,8 +18,6 @@ export const CharacterInfo = ({ character }: { character: Character | null }) =>
     const films = await getCharacterFilms(character!)
     films.sort((a, b) => a.episode_id - b.episode_id)
     setFilms(films)
-    const ships = await getCharacterShips(character!)
-    setShips(ships)
     setIsLoading(false)
   }
 
@@ -30,60 +26,55 @@ export const CharacterInfo = ({ character }: { character: Character | null }) =>
   }, [])
 
   return (
-    <div className="info-container">
+    <div className={style['info-container']}>
       {isLoading && (
-        <div className="skeleton-info-container">
-          <div className="skeleton-modal" />
-          <div className="skeleton-modal" />
-          <div className="skeleton-modal" />
+        <div className={style['skeleton-info-container']}>
+          <div className={style['skeleton-modal']} />
+          <div className={style['skeleton-modal']} />
+          <div className={style['skeleton-modal']} />
         </div>
       )}
       {!isLoading && character && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-
-          <div style={{ display: 'flex', gap: '0.5rem', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <div className="character-info-tittle">
+        <div className={style['data-container']}>
+          <div className={style['personal-info']} >
+            <img className={style['character-image']} src={`https://starwars-visualguide.com/assets/img/characters/${character?.url.split('/')[5]}.jpg`} alt={character?.name} />
+            <div className={style['character-info-tittle']}>
               <p>
                 {character?.name} <i style={{ color: genderObject[character?.gender].color }} className={`${genderObject[character?.gender].icon} fa-lg`} />
               </p>
             </div>
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-              <SmallCard header="Height" content={`${character?.height} cm.`} />
-              <SmallCard header="Weight" content={`${character?.mass} kg.`} />
-              <SmallCard header="Birth Year" content={character?.birth_year} />
-              <SmallCard header="Hair Color" content={character?.hair_color} />
-              <SmallCard header="Eye Color" content={character?.eye_color} />
-              <SmallCard header="Home World" content={homeWorld?.name || ''} />
+            <div className={style['badge-container']}>
+              <div className={style['badge']}>
+                <p><i className="fa-solid fa-ruler-vertical"></i> {character?.height} cm.</p>
+              </div>
+              <div className={style['badge']}>
+                <p><i className="fa-solid fa-weight-hanging"></i> {character?.mass} kg.</p>
+              </div>
+              <div className={style['badge']}>
+                <p><i className="fa-solid fa-cake-candles"></i> {character?.birth_year}</p>
+              </div>
+              <div className={style['badge']}>
+                <p><i className="fa-solid fa-eye"></i> {character?.eye_color}</p>
+              </div>
+              <div className={style['badge']}>
+                <p><i className="fa-solid fa-earth-americas"></i> {homeWorld?.name}</p>
+              </div>
             </div>
           </div>
-          {films.length > 0 && (
-            <div style={{ display: 'flex', gap: '0.5rem', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'center' }}>
-              <div className="sub-title">
+          <div className={style['film-container']}>
+            <div className={style['film-info']}>
+              <div className={style['sub-title']}>
                 <strong>Films</strong>
-              </div>
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-                {films.map(film => (
-                  <SmallCard content={film.title} header={`SW: Episode ${film.episode_id}`} />
-                ))}
-              </div>
-            </div>
-          )}
-          {ships.length > 0 && (
-            <div style={{ display: 'flex', gap: '0.5rem', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'center' }}>
-              <div className="sub-title">
-                <strong>Ships</strong>
-              </div>
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-                {ships.map(ship => (
-                  <SmallCard content={ship.name} header="Name" />
-                ))}
+                <div className={style['film-list']} >
+                  {films.map(film => (
+                    <img className={style['film-image']} src={`https://starwars-visualguide.com/assets/img/films/${film.episode_id}.jpg`} alt={film.title} />
+                  ))}
+                </div>
               </div>
             </div>
-          )}
-
+          </div>
         </div>
       )}
-
     </div>
   )
 }

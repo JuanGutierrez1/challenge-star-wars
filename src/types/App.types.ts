@@ -1,5 +1,12 @@
 import React from "react"
 
+export interface CharactersResponse {
+  results: Character[]
+  count: number
+  next: string
+  previous: string
+}
+
 export type Character = {
   name: string
   height: string
@@ -11,6 +18,7 @@ export type Character = {
   films: string[]
   starships: string[]
   eye_color: string
+  url: string
 }
 
 export type World = {
@@ -22,11 +30,6 @@ export type Film = {
   episode_id: number
 }
 
-export type Ship = {
-  name: string
-  model: string
-}
-
 export type GenderObject = {
   [key: string]: {
     color: string
@@ -36,4 +39,5 @@ export type GenderObject = {
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ReactNode
+  onSearch?: () => void
 }

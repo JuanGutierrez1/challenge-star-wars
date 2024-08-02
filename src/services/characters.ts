@@ -1,14 +1,15 @@
-import { Character, Film, Ship, World } from "../types/App.types"
+import { Character, CharactersResponse, Film, World } from "../types/App.types"
 
 // If i receive a empty string, i will return all characters
-export async function getFilteredCharacters(search: string) {
+export async function getFilteredCharacters(search: string, page: number = 1) {
   try {
-    const response = await fetch(`https://swapi.dev/api/people/?search=${search}`)
-    const { results }: { results: Character[] } = await response.json()
-    return results
+    const response = await fetch(`https://swapi.dev/api/people/?search=${search}&page=${page}`)
+    // const { results }: { results: Character[] } = await response.json()
+    const characters: CharactersResponse = await response.json()
+    return characters
   } catch (error) {
     console.error(error)
-    return []
+    return { results: [], count: 0, next: '', previous: '' }
   }
 }
 
@@ -33,22 +34,6 @@ export async function getCharacterFilms(character: Character) {
       })
     )
     return films
-  } catch (error) {
-    console.error(error)
-    return []
-  }
-}
-
-export async function getCharacterShips(character: Character) {
-  try {
-    const ships = await Promise.all(
-      character.starships.map(async (shipUrl) => {
-        const response = await fetch(shipUrl)
-        const ship: Ship = await response.json()
-        return ship
-      })
-    )
-    return ships
   } catch (error) {
     console.error(error)
     return []

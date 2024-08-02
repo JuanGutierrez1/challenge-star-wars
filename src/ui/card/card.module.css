@@ -9,11 +9,7 @@
 .card,
 .skeleton-card {
   cursor: pointer;
-  /* background-color: #0c213c; */
-  /* background: rgb(2, 0, 36);
-  background: linear-gradient(200deg, #0c213c 0%, #2a4057 35%, #5c7d8e 100%); */
-  background: radial-gradient(circle at -4% -12.9%, #2a4057 0.3%, #0c213c 90.2%);
-
+  background-color: #0c213c;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,6 +21,16 @@
   transition: transform 0.8s;
   font-size: 1rem;
   transform-style: preserve-3d;
+}
+
+.character-image {
+  object-fit: cover;
+  height: 150px;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  opacity: 0.6;
+  border-radius: 10px;
 }
 
 .front-content,

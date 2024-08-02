@@ -4,7 +4,7 @@
   align-items: center;
   gap: 1.5rem;
   margin-top: 2rem;
-  padding: 3rem 1rem;
+  padding: 3rem 1rem 1.5rem 1rem;
   border-radius: 10px;
 
   background: radial-gradient(circle at -8.9% 51.2%, #5c7d8e 0%, #5c7d8e 15.9%, #86aaba 15.9%, #86aaba 24.4%, #2a4057 24.5%, #2a4057 66%);

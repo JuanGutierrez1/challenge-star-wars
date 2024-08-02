@@ -48,6 +48,16 @@ export default defineConfig({
               statuses: [0, 200]
             }
           }
+        },
+        {
+          urlPattern: new RegExp('https://starwars-visualguide.com/'),
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'characters-pictures-cache',
+            cacheableResponse: {
+              statuses: [0, 200]
+            }
+          }
         }
         ]
       },

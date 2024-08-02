@@ -17,7 +17,8 @@ export const Card = ({ character, isLoading = false, handleClick }: CardProps) =
         <div className={style['flip-container']} onClick={() => handleClick!(character!)}>
           <div className={style['card']}>
             <div className={style['front-content']}>
-              <strong style={{ fontSize: '1.5rem' }}>
+              <img className={style['character-image']} src={`https://starwars-visualguide.com/assets/img/characters/${character?.url.split('/')[5]}.jpg`} alt={character?.name} />
+              <strong style={{ fontSize: '1.5rem', zIndex: 2 }}>
                 {character?.name}
               </strong>
             </div>
