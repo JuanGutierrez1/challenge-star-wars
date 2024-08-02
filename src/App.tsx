@@ -8,6 +8,7 @@ import { Card } from './ui/card/card'
 import style from './App.module.css'
 import 'react-responsive-modal/styles.css';
 import { Button } from './ui/button/button'
+import { Pagination } from './ui/pagination/pagination'
 
 
 function App() {
@@ -36,50 +37,6 @@ function App() {
   const handleClick = (character: Character) => {
     setSelectedCharacter(character)
     setOpen(true)
-  }
-
-
-  const renderPagination = () => {
-    const pages = [];
-
-    pages.push(
-      <Button key={1} onClick={() => setCurrentPage(1)} active={currentPage === 1}>
-        1
-      </Button>
-    );
-
-    if (currentPage > 3) {
-      pages.push(<span key="dots1"> ... </span>);
-    }
-
-    const startPage = Math.max(2, currentPage - 1);
-    const endPage = Math.min(totalPages - 1, currentPage + 1);
-
-    for (let i = startPage; i <= endPage; i++) {
-      if (i > 1 && i < totalPages) {
-        pages.push(
-          <Button key={i} onClick={() => setCurrentPage(i)} active={currentPage === i}>
-            {i}
-          </Button>
-        );
-      }
-    }
-
-    if (currentPage < totalPages - 2) {
-      pages.push(<span key="dots2"> ... </span>);
-    }
-
-    pages.push(
-      <Button
-        key={totalPages}
-        onClick={() => setCurrentPage(totalPages)}
-        active={currentPage === totalPages}
-      >
-        {totalPages}
-      </Button>
-    );
-
-    return pages;
   }
 
   useEffect(() => {
@@ -116,7 +73,7 @@ function App() {
       </div>
       <div>
         <Button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>{"<"}</Button>
-        {renderPagination()}
+        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
         <Button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}>{">"}</Button>
       </div>
       <Modal
