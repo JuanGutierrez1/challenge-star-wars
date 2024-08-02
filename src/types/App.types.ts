@@ -37,6 +37,10 @@ export type GenderObject = {
   }
 }
 
+export type FilmsObject = {
+  [key: number]: number
+}
+
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ReactNode
   onSearch?: () => void

@@ -36,15 +36,17 @@ export const Pagination = ({ setCurrentPage, currentPage, totalPages }: Paginati
     pages.push(<span key="dots2"> ... </span>);
   }
 
-  pages.push(
-    <Button
-      key={totalPages}
-      onClick={() => setCurrentPage(totalPages)}
-      active={currentPage === totalPages}
-    >
-      {totalPages}
-    </Button>
-  );
+  if (totalPages !== 1) {
+    pages.push(
+      <Button
+        key={totalPages}
+        onClick={() => setCurrentPage(totalPages)}
+        active={currentPage === totalPages}
+      >
+        {totalPages}
+      </Button>
+    );
+  }
 
   return pages;
 }

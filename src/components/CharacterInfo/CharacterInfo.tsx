@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { getCharacterFilms, getCharacterPlanet } from "../../services/characters"
 import { Character, Film, World } from "../../types/App.types"
 import style from './characterInfo.module.css'
-import { genderObject } from "../../utils/utils"
+import { capitalizeFirstLetter, filmsObject, genderObject } from "../../utils/utils"
 
 
 
@@ -31,7 +31,6 @@ export const CharacterInfo = ({ character }: { character: Character | null }) =>
         <div className={style['skeleton-info-container']}>
           <div className={style['skeleton-modal']} />
           <div className={style['skeleton-modal']} />
-          <div className={style['skeleton-modal']} />
         </div>
       )}
       {!isLoading && character && (
@@ -54,7 +53,7 @@ export const CharacterInfo = ({ character }: { character: Character | null }) =>
                 <p><i className="fa-solid fa-cake-candles"></i> {character?.birth_year}</p>
               </div>
               <div className={style['badge']}>
-                <p><i className="fa-solid fa-eye"></i> {character?.eye_color}</p>
+                <p><i className="fa-solid fa-eye"></i> {capitalizeFirstLetter(character?.eye_color)}</p>
               </div>
               <div className={style['badge']}>
                 <p><i className="fa-solid fa-earth-americas"></i> {homeWorld?.name}</p>
@@ -67,7 +66,7 @@ export const CharacterInfo = ({ character }: { character: Character | null }) =>
                 <strong>Films</strong>
                 <div className={style['film-list']} >
                   {films.map(film => (
-                    <img className={style['film-image']} src={`https://starwars-visualguide.com/assets/img/films/${film.episode_id}.jpg`} alt={film.title} />
+                    <img key={film.episode_id} className={style['film-image']} src={`https://starwars-visualguide.com/assets/img/films/${filmsObject[film.episode_id]}.jpg`} alt={film.title} />
                   ))}
                 </div>
               </div>

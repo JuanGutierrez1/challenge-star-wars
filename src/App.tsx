@@ -20,17 +20,22 @@ function App() {
   const [totalPages, setTotalPages] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
 
-  const fetchCharacters = async () => {
+  const fetchCharacters = async (page = currentPage) => {
     setIsLoading(true)
-    const response = await getFilteredCharacters(search, currentPage)
+    const response = await getFilteredCharacters(search, page)
     setIsLoading(false)
     setTotalPages(Math.ceil(response.count / 10))
     setCharacters(response.results)
   }
 
+  const handleSearch = () => {
+    setCurrentPage(1)
+    fetchCharacters(1)
+  }
+
   const handleInputEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      fetchCharacters()
+      handleSearch()
     }
   }
 
@@ -54,7 +59,7 @@ function App() {
         type='text'
         onChange={(e) => setSearch(e.target.value)}
         placeholder='Search by name...'
-        onSearch={fetchCharacters}
+        onSearch={handleSearch}
         onKeyDown={handleInputEnter}
         icon={<i className="fa-solid fa-magnifying-glass"></i>}
       />
@@ -71,11 +76,14 @@ function App() {
           </div>
         )}
       </div>
-      <div>
-        <Button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>{"<"}</Button>
-        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
-        <Button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}>{">"}</Button>
-      </div>
+      {!isLoading && (
+        <div>
+          <Button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>{"<"}</Button>
+          <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
+          <Button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}>{">"}</Button>
+        </div>
+      )
+      }
       <Modal
         open={open}
         center

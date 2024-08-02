@@ -4,9 +4,16 @@
   text-align: center;
 }
 
-.info-container .skeleton-info-container {
+.info-container {
   min-height: 300px;
   transition: transform 0.8s;
+}
+
+.skeleton-info-container {
+  display: flex;
+  gap: 1rem;
+  transition: transform 0.8s;
+  min-height: 300px;
 }
 
 .skeleton-modal {
@@ -14,8 +21,8 @@
   background: linear-gradient(90deg, #0c213c 25%, #2a4057 50%, #0c213c 75%);
   background-size: 200% 100%;
   border-radius: 15px;
-  height: 100px;
-  margin-top: 2rem;
+  height: 400px;
+  width: 100%;
 }
 
 .personal-info {
