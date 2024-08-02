@@ -24,6 +24,7 @@ export const filmsObject: FilmsObject = {
   6: 3
 }
 
-export const capitalizeFirstLetter = (string: string) => {
+export const capitalizeFirstLetter = (string: string | null) => {
+  if (!string) return null;
   return string.charAt(0).toUpperCase() + string.slice(1);
 }

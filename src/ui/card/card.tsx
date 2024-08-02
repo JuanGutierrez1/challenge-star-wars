@@ -1,4 +1,5 @@
 import { Character } from "../../types/App.types"
+import { capitalizeFirstLetter } from "../../utils/utils"
 import style from './card.module.css'
 
 interface CardProps {
@@ -26,7 +27,7 @@ export const Card = ({ character, isLoading = false, handleClick }: CardProps) =
               <div className={style['card-details']}>
                 <p><i className="fa-solid fa-ruler-vertical"></i> {character?.height} cm.</p>
                 <p><i className="fa-solid fa-weight-hanging"></i> {character?.mass} kg.</p>
-                <p><i className="fa-solid fa-cake-candles"></i> {character?.birth_year}</p>
+                <p><i className="fa-solid fa-cake-candles"></i> {capitalizeFirstLetter(character?.birth_year || null)}</p>
               </div>
               <p>More details <i className="fa-solid fa-arrow-up-right-from-square"></i></p>
             </div>

@@ -50,7 +50,7 @@ export const CharacterInfo = ({ character }: { character: Character | null }) =>
                 <p><i className="fa-solid fa-weight-hanging"></i> {character?.mass} kg.</p>
               </div>
               <div className={style['badge']}>
-                <p><i className="fa-solid fa-cake-candles"></i> {character?.birth_year}</p>
+                <p><i className="fa-solid fa-cake-candles"></i> {capitalizeFirstLetter(character?.birth_year)}</p>
               </div>
               <div className={style['badge']}>
                 <p><i className="fa-solid fa-eye"></i> {capitalizeFirstLetter(character?.eye_color)}</p>
