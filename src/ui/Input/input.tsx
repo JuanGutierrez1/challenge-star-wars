@@ -2,8 +2,7 @@ import { InputProps } from "../../types/App.types"
 import './input.css'
 
 
-export const Input = (props: InputProps) => {
-  const { onSearch, ...restProps } = props;
+export const Input = ({ onSearch, ...restProps }: InputProps) => {
   return (
     <div className="input-container">
       <input {...restProps} />

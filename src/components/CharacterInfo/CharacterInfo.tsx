@@ -1,29 +1,12 @@
-import { useEffect, useState } from "react"
-import { getCharacterFilms, getCharacterPlanet } from "../../services/characters"
-import { Character, Film, World } from "../../types/App.types"
+import { Character } from "../../types/App.types"
 import style from './characterInfo.module.css'
 import { capitalizeFirstLetter, filmsObject, genderObject } from "../../utils/utils"
+import { useFetchCharacterInfo } from "../../hooks/useFetchCharacterInfo"
 
 
 
 export const CharacterInfo = ({ character }: { character: Character | null }) => {
-  const [homeWorld, setHomeWorld] = useState<World | null>(null)
-  const [films, setFilms] = useState<Film[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-
-  const fetchCharacterInfo = async () => {
-    setIsLoading(true)
-    const planet = await getCharacterPlanet(character!)
-    setHomeWorld(planet)
-    const films = await getCharacterFilms(character!)
-    films.sort((a, b) => a.episode_id - b.episode_id)
-    setFilms(films)
-    setIsLoading(false)
-  }
-
-  useEffect(() => {
-    fetchCharacterInfo()
-  }, [])
+  const { homeWorld, films, isLoading } = useFetchCharacterInfo(character)
 
   return (
     <div className={style['info-container']}>

@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import { getFilteredCharacters } from './services/characters'
+import { useState } from 'react'
 import { Character } from './types/App.types'
 import { Input } from './ui/Input/input'
 import Modal from 'react-responsive-modal'
@@ -9,24 +8,14 @@ import style from './App.module.css'
 import 'react-responsive-modal/styles.css';
 import { Button } from './ui/button/button'
 import { Pagination } from './ui/pagination/pagination'
+import { useFetchCharacters } from './hooks/useFetchCharacters'
 
 
 function App() {
-  const [characters, setCharacters] = useState<Character[]>([])
-  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [search, setSearch] = useState('')
-  const [open, setOpen] = useState(false)
-  const [totalPages, setTotalPages] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
-
-  const fetchCharacters = async (page = currentPage) => {
-    setIsLoading(true)
-    const response = await getFilteredCharacters(search, page)
-    setIsLoading(false)
-    setTotalPages(Math.ceil(response.count / 10))
-    setCharacters(response.results)
-  }
+  const { characters, isLoading, totalPages, setSearch, fetchCharacters } = useFetchCharacters(currentPage)
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null)
+  const [open, setOpen] = useState(false)
 
   const handleSearch = () => {
     setCurrentPage(1)
@@ -43,14 +32,6 @@ function App() {
     setSelectedCharacter(character)
     setOpen(true)
   }
-
-  useEffect(() => {
-    fetchCharacters()
-  }, [currentPage])
-
-  useEffect(() => {
-    fetchCharacters()
-  }, [])
 
   return (
     <div className={style['app-container']}>
