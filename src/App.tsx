@@ -33,6 +33,7 @@ function App() {
     setOpen(true)
   }
 
+
   return (
     <div className={style['app-container']}>
       <img src='sw-logo.png' alt='Star Wars Logo' height={150} />
